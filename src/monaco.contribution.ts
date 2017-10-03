@@ -272,3 +272,24 @@ registerLanguage({
 	aliases: ['Small Basic', 'sb'],
 	module: './sb'
 });
+
+registerLanguage({
+	id: 'mysql',
+	extensions: ['.sql'],
+	aliases: ['MySQL', 'mysql'],
+	module: './mysql'
+});
+
+registerLanguage({
+	id: 'pgsql',
+	extensions: ['.sql'],
+	aliases: ['PostgreSQL', 'postgres', 'pg', 'postgre'],
+	module: './pgsql'
+});
+
+registerLanguage({
+	id: 'redshift',
+	extensions: ['.sql'],
+	aliases: ['Redshift', 'redshift'],
+	module: './redshift'
+});
