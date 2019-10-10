@@ -21,6 +21,7 @@ const BUNDLED_FILE_HEADER = [
 ].join('\n');
 
 bundleOne('monaco.contribution');
+bundleOne('abap/abap');
 bundleOne('bat/bat');
 bundleOne('css/css');
 bundleOne('coffee/coffee');
@@ -42,6 +43,7 @@ bundleOne('markdown/markdown');
 bundleOne('msdax/msdax');
 bundleOne('objective-c/objective-c');
 bundleOne('pascal/pascal');
+bundleOne('pascaligo/pascaligo');
 bundleOne('php/php');
 bundleOne('powershell/powershell');
 bundleOne('postiats/postiats');
@@ -58,6 +60,7 @@ bundleOne('typescript/typescript');
 bundleOne('vb/vb');
 bundleOne('xml/xml');
 bundleOne('yaml/yaml');
+bundleOne('sophia/sophia');
 bundleOne('solidity/solidity');
 bundleOne('sb/sb');
 bundleOne('mysql/mysql');
@@ -74,6 +77,7 @@ bundleOne('azcli/azcli');
 bundleOne('apex/apex');
 bundleOne('tcl/tcl');
 bundleOne('graphql/graphql');
+bundleOne('twig/twig');
 
 function bundleOne(moduleId, exclude) {
 	requirejs.optimize({

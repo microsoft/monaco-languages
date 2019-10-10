@@ -1,9 +1,10 @@
-# Monaco Languages [![Build Status](https://travis-ci.org/Microsoft/monaco-languages.svg?branch=master)](https://travis-ci.org/Microsoft/monaco-languages)
+# Monaco Languages [![Build Status](https://dev.azure.com/ms/monaco-languages/_apis/build/status/microsoft.monaco-languages?branchName=master)](https://dev.azure.com/ms/monaco-languages/_build/latest?definitionId=140&branchName=master)
 
 Colorization and configuration supports for multiple languages for the Monaco Editor:
 
 ![monaco-languages](https://cloud.githubusercontent.com/assets/5047891/15938606/1fd4bac6-2e74-11e6-8839-d455da8bc8a7.gif)
 
+* abap
 * apex
 * azcli
 * bat
@@ -27,6 +28,7 @@ Colorization and configuration supports for multiple languages for the Monaco Ed
 * mysql
 * objective-c
 * pascal
+* pascaligo
 * pgsql
 * php
 * postiats
@@ -43,6 +45,7 @@ Colorization and configuration supports for multiple languages for the Monaco Ed
 * sql
 * st
 * swift
+* twig
 * typescript
 * vb
 * xml
@@ -75,14 +78,17 @@ This npm module is bundled and distributed in the [monaco-editor](https://www.np
 * create `$/src/myLang/myLang.ts`
 * create `$/src/myLang/myLang.test.ts`
 * restart compilation with `$> npm run watch`
-* edit `$/src/monaco.contribution.ts` and register your new language:
+* edit `$/src/monaco.contribution.ts` and register your new language
+```js
+  import './myLang/myLang.contribution';
+```
 * edit `$/test/setup.js` and load your new language while testing
 ```js
-  'release/dev/sql/sql.test',
+  'release/dev/myLang/myLang.test',
 ```
 * edit `$/scripts/bundle.js` and ship your new language
 ```js
-  bundleOne('sql/sql'),
+  bundleOne('myLang/myLang');
 ```
 
 ## Code of Conduct

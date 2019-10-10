@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 'use strict';
 
+import './abap/abap.contribution';
 import './bat/bat.contribution';
 import './coffee/coffee.contribution';
 import './cpp/cpp.contribution';
@@ -22,10 +23,12 @@ import './kotlin/kotlin.contribution';
 import './less/less.contribution';
 import './lua/lua.contribution';
 import './markdown/markdown.contribution';
+import './mips/mips.contribution';
 import './msdax/msdax.contribution';
 import './mysql/mysql.contribution';
 import './objective-c/objective-c.contribution';
 import './pascal/pascal.contribution';
+import './pascaligo/pascaligo.contribution';
 import './pgsql/pgsql.contribution';
 import './php/php.contribution';
 import './postiats/postiats.contribution';
@@ -41,11 +44,13 @@ import './ruby/ruby.contribution';
 import './rust/rust.contribution';
 import './sb/sb.contribution';
 import './scss/scss.contribution';
+import './sophia/sophia.contribution';
 import './solidity/solidity.contribution';
 import './sql/sql.contribution';
 import './st/st.contribution';
 import './swift/swift.contribution';
 import './tcl/tcl.contribution';
+import './twig/twig.contribution';
 import './typescript/typescript.contribution';
 import './vb/vb.contribution';
 import './xml/xml.contribution';
