@@ -179,7 +179,7 @@ export const language = <ILanguage>{
 		],
 
 		string: [
-			[/[^\\"]+/, 'string'],
+			[/[^"]+/, 'string'],
 			[/@escapes/, 'string.escape'],
 			[/\\./, 'string.escape.invalid'],
 			[/"C?/, 'string', '@pop']
