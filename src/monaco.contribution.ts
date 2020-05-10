@@ -9,6 +9,7 @@ import './apex/apex.contribution';
 import './azcli/azcli.contribution';
 import './bat/bat.contribution';
 import './cameligo/cameligo.contribution';
+import './canarinho/canarinho.contribution';
 import './clojure/clojure.contribution';
 import './coffee/coffee.contribution';
 import './cpp/cpp.contribution';
