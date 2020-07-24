@@ -110,5 +110,44 @@ testTokenization('systemverilog', [
 			{ startIndex: 20, type: ''},
 			{ startIndex: 21, type: 'delimiter.curly.sv'}
 		]
-	}]
+	}],
+	// Strings
+	[{
+		line: 'var = "Hello world\n";',
+		tokens: [
+			{ startIndex: 0,  type: 'keyword.var.sv'},
+			{ startIndex: 3, type: ''},
+			{ startIndex: 4,  type: 'delimiter.sv'},
+			{ startIndex: 5, type: ''},
+			{ startIndex: 6,  type: 'string.escape.sv'},
+			{ startIndex: 7, type: 'string.sv'},
+			{ startIndex: 18, type: 'error-token.sv'},
+			{ startIndex: 20, type: 'string.escape.sv'},
+			{ startIndex: 21, type: 'delimiter.sv'},
+		]
+	}],
+	[{
+		line: '"\b hi \q ";',
+		tokens: [
+			{ startIndex: 0,  type: 'string.escape.sv'},
+			{ startIndex: 1, type: 'error-token.sv'},
+			{ startIndex: 3, type: 'string.sv'},
+			{ startIndex: 7, type: 'error-token.sv'},
+			{ startIndex: 9, type: 'string.sv'},
+			{ startIndex: 11,  type: 'string.escape.sv'},
+			{ startIndex: 12, type: 'delimiter.sv'},
+		]
+	}],
+	[{
+		line: '"multi\n line\n string"',
+		tokens: [
+			{ startIndex: 0,  type: 'string.escape.sv'},
+			{ startIndex: 1, type: 'string.sv'},
+			{ startIndex: 6, type: 'error-token.sv'},
+			{ startIndex: 8, type: 'string.sv'},
+			{ startIndex: 13, type: 'error-token.sv'},
+			{ startIndex: 15, type: 'string.sv'},
+			{ startIndex: 22,  type: 'string.escape.sv'},
+		]
+	}],
 ]);
