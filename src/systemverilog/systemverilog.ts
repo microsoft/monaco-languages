@@ -319,9 +319,7 @@ export const language = <ILanguage>{
 	// The main tokenizer for our languages
 	tokenizer: {
 		root: [
-			// C++ 11 Raw String
-			[/@encoding?R\"(?:([^ ()\\\t]*))\(/, { token: 'string.raw.begin', next: '@raw.$1' }],
-
+			{include: '@string'},
 			// identifiers and keywords
 			[/[a-z_]\w*/, {
 				cases: {
@@ -393,10 +391,16 @@ export const language = <ILanguage>{
 		],
 
 		string: [
-			[/[^\\"]+/, 'string'],
-			[/@escapes/, 'string.escape'],
-			[/\\./, 'string.escape.invalid'],
-			[/"/, 'string', '@pop']
+			[/"/, 'string.escape', '@dblStringBody']
+		],
+		dblStringBody: [
+			[/\\./, {
+				cases: {
+					'@default': 'error-token'
+				}
+			}],
+			[/"/, 'string.escape', '@popall'],
+			[/./, 'string'],
 		],
 
 		raw: [
