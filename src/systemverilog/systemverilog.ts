@@ -319,8 +319,6 @@ export const language = <ILanguage>{
 	// The main tokenizer for our languages
 	tokenizer: {
 		root: [
-			//string
-			//{include: '@string'},
 
 			// identifiers and keywords
 			[/[a-z_]\w*/, {
