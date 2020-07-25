@@ -311,7 +311,7 @@ export const language = <ILanguage>{
 
 	// we include these common regular expressions
 	symbols: /[=><!~?:&|+\-*\/\^%]+/,
-	escapes: /\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})/,
+	escapes: /(%%)|\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8}|[xd]dd)/,
 	integersuffix: /(ll|LL|u|U|l|L)?(ll|LL|u|U|l|L)?/,
 	floatsuffix: /[fFlL]?/,
 	encoding: /u|u8|U|L/,
@@ -319,7 +319,9 @@ export const language = <ILanguage>{
 	// The main tokenizer for our languages
 	tokenizer: {
 		root: [
-			{include: '@string'},
+			//string
+			//{include: '@string'},
+
 			// identifiers and keywords
 			[/[a-z_]\w*/, {
 				cases: {
@@ -391,16 +393,10 @@ export const language = <ILanguage>{
 		],
 
 		string: [
-			[/"/, 'string.escape', '@stringBody']
-		],
-		stringBody: [
-			[/\\./, {
-				cases: {
-					'@default': 'error-token'
-				}
-			}],
-			[/"/, 'string.escape', '@popall'],
-			[/./, 'string'],
+			[/[^\\"]+/, 'string'],
+			[/@escapes/, 'string.escape'],
+			[/\\./, 'string.escape.invalid'],
+			[/"/, 'string.escape', '@pop'],
 		],
 
 		include: [
