@@ -582,5 +582,127 @@ testTokenization('systemverilog', [
 			{ startIndex: 40, type: 'delimiter.sv'},
 		]
 	}],
+	// Comments
+	[{
+		line: '//',
+		tokens: [
+			{ startIndex: 0, type: 'comment.sv' }
+		]
+	}],
+
+	[{
+		line: '    // a comment',
+		tokens: [
+			{ startIndex: 0, type: '' },
+			{ startIndex: 4, type: 'comment.sv' }
+		]
+	}],
+
+	[{
+		line: '// a comment',
+		tokens: [
+			{ startIndex: 0, type: 'comment.sv' }
+		]
+	}],
+
+	[{
+		line: '//sticky comment',
+		tokens: [
+			{ startIndex: 0, type: 'comment.sv' }
+		]
+	}],
+
+	[{
+		line: '/* //*/ a',
+		tokens: [
+			{ startIndex: 0, type: 'comment.sv' },
+			{ startIndex: 7, type: '' },
+			{ startIndex: 8, type: 'identifier.sv' }
+		]
+	}],
+
+	[{
+		line: '1 / 2; /* comment',
+		tokens: [
+			{ startIndex: 0, type: 'number.sv' },
+			{ startIndex: 1, type: '' },
+			{ startIndex: 2, type: 'delimiter.sv' },
+			{ startIndex: 3, type: '' },
+			{ startIndex: 4, type: 'number.sv' },
+			{ startIndex: 5, type: 'delimiter.sv' },
+			{ startIndex: 6, type: '' },
+			{ startIndex: 7, type: 'comment.sv' }
+		]
+	}],
+
+	[{
+		line: 'int x = 1; // COMMENT // COMMENT COMMENT',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.int.sv' },
+			{ startIndex: 3, type: '' },
+			{ startIndex: 4, type: 'identifier.sv' },
+			{ startIndex: 5, type: '' },
+			{ startIndex: 6, type: 'delimiter.sv' },
+			{ startIndex: 7, type: '' },
+			{ startIndex: 8, type: 'number.sv' },
+			{ startIndex: 9, type: 'delimiter.sv' },
+			{ startIndex: 10, type: '' },
+			{ startIndex: 11, type: 'comment.sv' }
+		]
+	}],
+
+	// Comments - range comment, single line
+	[{
+		line: '/* a simple comment */',
+		tokens: [
+			{ startIndex: 0, type: 'comment.sv' }
+		]
+	}],
+
+	[{
+		line: 'int x = /* a simple comment */ 1;',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.int.sv' },
+			{ startIndex: 3, type: '' },
+			{ startIndex: 4, type: 'identifier.sv' },
+			{ startIndex: 5, type: '' },
+			{ startIndex: 6, type: 'delimiter.sv' },
+			{ startIndex: 7, type: '' },
+			{ startIndex: 8, type: 'comment.sv' },
+			{ startIndex: 30, type: '' },
+			{ startIndex: 31, type: 'number.sv' },
+			{ startIndex: 32, type: 'delimiter.sv' }
+		]
+	}],
+
+	[{
+		line: 'logic x = /* comment */ 1; */',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.logic.sv' },
+			{ startIndex: 3, type: '' },
+			{ startIndex: 4, type: 'identifier.sv' },
+			{ startIndex: 5, type: '' },
+			{ startIndex: 6, type: 'delimiter.sv' },
+			{ startIndex: 7, type: '' },
+			{ startIndex: 8, type: 'comment.sv' },
+			{ startIndex: 21, type: '' },
+			{ startIndex: 22, type: 'number.sv' },
+			{ startIndex: 23, type: 'delimiter.sv' },
+			{ startIndex: 24, type: '' }
+		]
+	}],
+
+	[{
+		line: 'x = /**/;',
+		tokens: [
+			{ startIndex: 0, type: 'identifier.sv' },
+			{ startIndex: 1, type: '' },
+			{ startIndex: 2, type: 'delimiter.sv' },
+			{ startIndex: 3, type: '' },
+			{ startIndex: 4, type: 'comment.sv' },
+			{ startIndex: 8, type: 'delimiter.sv' }
+		]
+	}]
+
 ]);
 
