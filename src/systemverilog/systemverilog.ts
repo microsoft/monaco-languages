@@ -38,7 +38,7 @@ export const conf: IRichLanguageConfiguration = {
 		['sequence', 'endsequence'], 
 		['table', 'endtable'], 
 		['task', 'endtask'], 
-		
+
 	],
 	autoClosingPairs: [
 		{ open: '[', close: ']' },
@@ -151,9 +151,7 @@ export const language = <ILanguage>{
 	// The main tokenizer for our languages
 	tokenizer: {
 		root: [
-<<<<<<< HEAD
-=======
-			
+
 			// module instances
 			[/^(\s*)(@identifier)/, ['', {
 				cases: {
@@ -162,7 +160,6 @@ export const language = <ILanguage>{
 					'@default': { token: 'identifier', next: '@module_instance'}
 				}
 			}]],
->>>>>>> 7fffa52f4482d327bc5f2e2fa5aef76948ccf831
 
 			// identifiers and keywords
 			[/@identifier/, {
