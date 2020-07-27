@@ -7,26 +7,25 @@
 
 import { testTokenization } from '../test/testRunner';
 
-testTokenization('cpp', [
+testTokenization('sv', [
 	// Keywords
 	[{
-		line: 'int _tmain(int argc, _TCHAR* argv[])',
+		line: 'module demo #(parameter WIDTH = 8)',
 		tokens: [
-			{ startIndex: 0, type: 'keyword.int.cpp' },
-			{ startIndex: 3, type: '' },
-			{ startIndex: 4, type: 'identifier.cpp' },
-			{ startIndex: 10, type: 'delimiter.parenthesis.cpp' },
-			{ startIndex: 11, type: 'keyword.int.cpp' },
-			{ startIndex: 14, type: '' },
-			{ startIndex: 15, type: 'identifier.cpp' },
-			{ startIndex: 19, type: 'delimiter.cpp' },
-			{ startIndex: 20, type: '' },
-			{ startIndex: 21, type: 'identifier.cpp' },
-			{ startIndex: 27, type: 'delimiter.cpp' },
-			{ startIndex: 28, type: '' },
-			{ startIndex: 29, type: 'identifier.cpp' },
-			{ startIndex: 33, type: 'delimiter.square.cpp' },
-			{ startIndex: 35, type: 'delimiter.parenthesis.cpp' }
+			{ startIndex: 0,  type: 'keyword.module.sv' },
+			{ startIndex: 6,  type: '' },
+			{ startIndex: 7,  type: '' },
+			{ startIndex: 11, type: ''},
+			{ startIndex: 12, type: 'delimiter.sv'},
+			{ startIndex: 13, type: 'delimiter.parenthesis.sv'},
+			{ startIndex: 14, type: 'keyword.parameter.sv' },
+			{ startIndex: 23, type: ''},
+			{ startIndex: 24, type: ''},
+			{ startIndex: 29, type: ''},
+			{ startIndex: 30, type: 'delimiter.sv'},
+			{ startIndex: 31, type: ''},
+			{ startIndex: 31, type: 'number.sv'},
+			{ startIndex: 31, type: 'delimiter.parenthesis.sv'}
 		]
 	}],
 
