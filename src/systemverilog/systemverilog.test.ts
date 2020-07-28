@@ -164,16 +164,18 @@ testTokenization('systemverilog', [
 	}],
 
 	[{
-		line: '10\'bxxxxxxxxxx',
+		line: '10\'bxxxxxzxxxx',
 		tokens: [
-			{ startIndex: 0, type: 'number.sv'}
+			{ startIndex: 0, type: 'number.sv'},
+			{ startIndex: 2, type: 'number.binary.sv' }
 		]
 	}],
 
 	[{
-		line: '1\'bz',
+		line: '1\'Hz',
 		tokens: [
-			{ startIndex: 0, type: 'number.sv'}
+			{ startIndex: 0, type: 'number.sv'},
+			{ startIndex: 1, type: 'number.hex.sv' }
 		]
 	}],
 
@@ -188,6 +190,87 @@ testTokenization('systemverilog', [
 		line: '64.4e3445',
 		tokens: [
 			{ startIndex: 0, type: 'number.float.sv'}
+		]
+	}],
+
+	[{
+		line: 'if( my_var[3:0] == 4\'b0101)',
+		tokens: [
+			{ startIndex: 0,  type: 'keyword.if.sv'},
+			{ startIndex: 2,  type: 'delimiter.parenthesis.sv'},
+			{ startIndex: 3,  type: ''},
+			{ startIndex: 4,  type: 'identifier.sv'},
+			{ startIndex: 10, type: 'delimiter.square.sv'},
+			{ startIndex: 11, type: 'number.sv'},
+			{ startIndex: 12, type: 'delimiter.sv'},
+			{ startIndex: 13, type: 'number.sv'},
+			{ startIndex: 14, type: 'delimiter.square.sv'},
+			{ startIndex: 15, type: '' },
+			{ startIndex: 16, type: 'delimiter.sv'},
+			{ startIndex: 18, type: ''},
+			{ startIndex: 19, type: 'number.sv'},
+			{ startIndex: 20, type: 'number.binary.sv'},
+			{ startIndex: 26, type: 'delimiter.parenthesis.sv'}
+		]
+	}],
+
+	[{
+		line: 'typedef enum int {FAST_SIM = 0, RANDOM = 1, NOMINAL = 2, START_UP = 3} clock_plan_e;',
+		tokens: [
+			{ startIndex: 0,  type: 'keyword.typedef.sv'},
+			{ startIndex: 7,  type: ''},
+			{ startIndex: 8,  type: 'keyword.enum.sv'},
+			{ startIndex: 12, type: ''},
+			{ startIndex: 13, type: 'keyword.int.sv'},
+			{ startIndex: 16, type: ''},
+			{ startIndex: 17, type: 'delimiter.curly.sv'},
+			{ startIndex: 18, type: '' },
+			{ startIndex: 22, type: 'identifier.sv' },
+			{ startIndex: 26, type: '' },
+			{ startIndex: 27, type: 'delimiter.sv' },
+			{ startIndex: 28, type: '' },
+			{ startIndex: 29, type: 'number.sv' },
+			{ startIndex: 30, type: 'delimiter.sv' },
+			{ startIndex: 31, type: '' },
+			{ startIndex: 39, type: 'delimiter.sv' },
+			{ startIndex: 40, type: '' },
+			{ startIndex: 41, type: 'number.sv' },
+			{ startIndex: 42, type: 'delimiter.sv' },
+			{ startIndex: 43, type: '' },
+			{ startIndex: 52, type: 'delimiter.sv' },
+			{ startIndex: 53, type: '' },
+			{ startIndex: 54, type: 'number.sv' },
+			{ startIndex: 55, type: 'delimiter.sv' },
+			{ startIndex: 56, type: '' },
+			{ startIndex: 62, type: 'identifier.sv' },
+			{ startIndex: 65, type: '' },
+			{ startIndex: 66, type: 'delimiter.sv' },
+			{ startIndex: 67, type: '' },
+			{ startIndex: 68, type: 'number.sv' },
+			{ startIndex: 69, type: 'delimiter.curly.sv' },
+			{ startIndex: 70, type: '' },
+			{ startIndex: 71, type: 'identifier.sv' },
+			{ startIndex: 83, type: 'delimiter.sv' }
+		]
+	}],
+
+	[{
+		line: 'if( my_var[31:0] === 32\'h2aB0_113C )',
+		tokens: [
+			{ startIndex: 0,  type: 'keyword.if.sv'},
+			{ startIndex: 2,  type: 'delimiter.parenthesis.sv'},
+			{ startIndex: 3,  type: ''},
+			{ startIndex: 4,  type: 'identifier.sv'},
+			{ startIndex: 10, type: 'delimiter.square.sv'},
+			{ startIndex: 11, type: 'number.sv'},
+			{ startIndex: 13, type: 'delimiter.sv'},
+			{ startIndex: 14, type: 'number.sv'},
+			{ startIndex: 15, type: 'delimiter.square.sv'},
+			{ startIndex: 16, type: ''},
+			{ startIndex: 21, type: 'number.sv'},
+			{ startIndex: 23, type: 'number.hex.sv'},
+			{ startIndex: 34, type: ''},
+			{ startIndex: 35, type: 'delimiter.parenthesis.sv'}
 		]
 	}]
 ]);
