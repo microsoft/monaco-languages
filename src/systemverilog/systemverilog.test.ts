@@ -110,5 +110,54 @@ testTokenization('systemverilog', [
 			{ startIndex: 20, type: ''},
 			{ startIndex: 21, type: 'delimiter.curly.sv'}
 		]
-	}]
+	}],
+
+	// Include tests
+	[{
+		line: '`include"tb_test.sv"',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.directive.include.sv'},
+			{ startIndex: 8, type: 'keyword.directive.include.begin.sv'},
+			{ startIndex: 9, type: 'string.include.identifier.sv'},
+			{ startIndex: 19, type: 'keyword.directive.include.end.sv'}
+		]
+	}, {
+		line: '`include "path/to/my/file.sv"',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.directive.include.sv'},
+			{ startIndex: 8, type: ''},
+			{ startIndex: 9, type: 'keyword.directive.include.begin.sv'},
+			{ startIndex: 10, type: 'string.include.identifier.sv'},
+			{ startIndex: 28, type: 'keyword.directive.include.end.sv'}
+		]
+	}, {
+		line: '`include                      "file.sv"',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.directive.include.sv'},
+			{ startIndex: 8, type: ''},
+			{ startIndex: 30, type: 'keyword.directive.include.begin.sv'},
+			{ startIndex: 31, type: 'string.include.identifier.sv'},
+			{ startIndex: 38, type: 'keyword.directive.include.end.sv'}
+		]
+	}, {
+		line: '   `include "file.sv"',
+		tokens: [
+			{ startIndex: 0, type: ''},
+			{ startIndex: 3, type: 'keyword.directive.include.sv'},
+			{ startIndex: 11, type: ''},
+			{ startIndex: 12, type: 'keyword.directive.include.begin.sv'},
+			{ startIndex: 13, type: 'string.include.identifier.sv'},
+			{ startIndex: 20, type: 'keyword.directive.include.end.sv'}
+		]
+	}, {
+		line: '   `include     "file.sv"',
+		tokens: [
+			{ startIndex: 0, type: ''},
+			{ startIndex: 3, type: 'keyword.directive.include.sv'},
+			{ startIndex: 11, type: ''},
+			{ startIndex: 16, type: 'keyword.directive.include.begin.sv'},
+			{ startIndex: 17, type: 'string.include.identifier.sv'},
+			{ startIndex: 24, type: 'keyword.directive.include.end.sv'}
+		]
+	}],
 ]);
