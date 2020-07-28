@@ -8,7 +8,7 @@ import { registerLanguage } from '../_.contribution';
 
 registerLanguage({
 	id: 'systemverilog',
-	extensions: ['.sv', '.svh', '.v'],
+	extensions: ['.sv', '.svh'],
 	aliases: ['SV', 'sv'],
 	loader: () => import('./systemverilog')
 });
