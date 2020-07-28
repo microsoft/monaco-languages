@@ -164,7 +164,7 @@ testTokenization('systemverilog', [
 	}],
 
 	[{
-		line: '10\'bxxxxxzxxxx',
+		line: '10\'bxxxx_zxxxx',
 		tokens: [
 			{ startIndex: 0, type: 'number.sv'},
 			{ startIndex: 2, type: 'number.binary.sv' }
@@ -172,7 +172,7 @@ testTokenization('systemverilog', [
 	}],
 
 	[{
-		line: '1\'Hz',
+		line: '1\'H?z',
 		tokens: [
 			{ startIndex: 0, type: 'number.sv'},
 			{ startIndex: 1, type: 'number.hex.sv' }
