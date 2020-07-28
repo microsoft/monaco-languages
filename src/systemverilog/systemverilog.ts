@@ -33,9 +33,10 @@ export const conf: IRichLanguageConfiguration = {
 		{ open: '\'', close: '\'' },
 	],
 	folding: {
+		offSide: false,
 		markers: {
-			start: new RegExp("^\\s*#pragma\\s+region\\b"),
-			end: new RegExp("^\\s*#pragma\\s+endregion\\b")
+			start: new RegExp("^\\s*(?:(?:(?:(if\\s(.*)|initial|always_ff|always_comb|always_latch|always\\s@\\*)\\s)?begin\\b)|(?:module\\b)|(?:function\\b)|(?:task\\b)|(?:specify\\b)|(?:case(?:x|z)?\\b)|(?:class\\b)|(?:program\b)|(?:clocking\\b)|(?:sequence\\b)|(?:package\\b)|(?:interface\\b)|(?:primitive\\b)|(?:property\\b)|(?:covergroup\\b)|(?:generate\\b))"),
+			end: new RegExp("^\\s*(?:(?:end\\b)|(?:endmodule\\b)|(?:endfunction\\b)|(?:endtask\\b)|(?:endspecify\\b)|(?:endcase\\b)|(?:endclass\\b)|(?:endprogram\\b)|(?:endclocking\\b)|(?:endsequence\\b)|(?:endpackage\\b)|(?:endinterface\\b)|(?:endprimitive\\b)|(?:endproperty\\b)|(?:endgroup\\b)|(?:endgenerate\\b))"),
 		}
 	}
 };

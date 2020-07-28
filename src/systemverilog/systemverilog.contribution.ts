@@ -12,3 +12,12 @@ registerLanguage({
 	aliases: ['SV', 'sv'],
 	loader: () => import('./systemverilog')
 });
+
+
+registerLanguage({
+	id: 'verilog',
+	extensions: ['.v', '.vh'],
+	aliases: ['V', 'v'],
+	loader: () => import('./systemverilog')
+});
+
