@@ -354,11 +354,13 @@ export const language = <ILanguage>{
 			// numbers
 			[/\d*\d+[eE]([\-+]?\d+)?(@floatsuffix)/, 'number.float'],
 			[/\d*\.\d+([eE][\-+]?\d+)?(@floatsuffix)/, 'number.float'],
-			[/0[xX][0-9a-fA-F']*[0-9a-fA-F](@integersuffix)/, 'number.hex'],
-			[/0[0-7']*[0-7](@integersuffix)/, 'number.octal'],
-			[/0[bB][0-1']*[0-1](@integersuffix)/, 'number.binary'],
-			[/\d[\d']*\d(@integersuffix)/, 'number'],
-			[/\d(@integersuffix)/, 'number'],
+			[/\d+/, 'number'],
+			[/'[d|D][0-9]*[0-9]/, 'number'],
+			[/'[b|B][0-1]*[0-1]/, 'number.binary'],
+			[/'[o|O][0-7]*[0-7]/, 'number.octal'],
+			[/'[h|H][0-9a-fA-F']*[0-9a-fA-F']/, 'number.hex'],
+			[/'[a-zA-Z]x*x/, 'number'],
+			[/'[a-zA-Z]z*z/, 'number'],
 
 			// delimiter: after number because of .\d floats
 			[/[;,.]/, 'delimiter'],

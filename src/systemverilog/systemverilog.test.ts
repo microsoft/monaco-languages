@@ -110,6 +110,85 @@ testTokenization('systemverilog', [
 			{ startIndex: 20, type: ''},
 			{ startIndex: 21, type: 'delimiter.curly.sv'}
 		]
+	}],
+
+	[{
+		line: 'a = 8\'hFF;',
+		tokens: [
+			{ startIndex: 0, type: 'identifier.sv' },
+			{ startIndex: 1, type: ''},
+			{ startIndex: 2, type: 'delimiter.sv'},
+			{ startIndex: 3, type: ''},
+			{ startIndex: 4, type: 'number.sv'},
+			{ startIndex: 5, type: 'number.hex.sv'},
+			{ startIndex: 9, type: 'delimiter.sv'}
+		]
+	}],
+
+	[{
+		line: 'a = 2\'b01;',
+		tokens: [
+			{ startIndex: 0, type: 'identifier.sv' },
+			{ startIndex: 1, type: ''},
+			{ startIndex: 2, type: 'delimiter.sv'},
+			{ startIndex: 3, type: ''},
+			{ startIndex: 4, type: 'number.sv'},
+			{ startIndex: 5, type: 'number.binary.sv'},
+			{ startIndex: 9, type: 'delimiter.sv'}
+		]
+	}],
+
+	[{
+		line: 'a = 6\'o654;',
+		tokens: [
+			{ startIndex: 0, type: 'identifier.sv' },
+			{ startIndex: 1, type: ''},
+			{ startIndex: 2, type: 'delimiter.sv'},
+			{ startIndex: 3, type: ''},
+			{ startIndex: 4, type: 'number.sv'},
+			{ startIndex: 5, type: 'number.octal.sv'},
+			{ startIndex: 10, type: 'delimiter.sv'}
+		]
+	}],
+
+	[{
+		line: 'a = 8\'d98;',
+		tokens: [
+			{ startIndex: 0, type: 'identifier.sv' },
+			{ startIndex: 1, type: ''},
+			{ startIndex: 2, type: 'delimiter.sv'},
+			{ startIndex: 3, type: ''},
+			{ startIndex: 4, type: 'number.sv'},
+			{ startIndex: 9, type: 'delimiter.sv'}
+		]
+	}],
+
+	[{
+		line: '10\'bxxxxxxxxxx',
+		tokens: [
+			{ startIndex: 0, type: 'number.sv'}
+		]
+	}],
+
+	[{
+		line: '1\'bz',
+		tokens: [
+			{ startIndex: 0, type: 'number.sv'}
+		]
+	}],
+
+	[{
+		line: '64E435456',
+		tokens: [
+			{ startIndex: 0, type: 'number.float.sv' }
+		]
+	}],
+
+	[{
+		line: '64.4e3445',
+		tokens: [
+			{ startIndex: 0, type: 'number.float.sv'}
+		]
 	}]
 ]);
 
