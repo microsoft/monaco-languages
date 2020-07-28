@@ -68,10 +68,12 @@ export const language = <ILanguage>{
 		'bind',
 		'bins', 
 		'binsof', 
+		'bit',
 		'break', 
 		'buf', 
 		'bufif0', 
 		'bufif1', 
+		'byte',
 		'case', 
 		'casex', 
 		'casez', 
@@ -154,6 +156,8 @@ export const language = <ILanguage>{
 		'input', 
 		'inside', 
 		'instance', 
+		'int',
+		'integer',
 		'interconnect',
 		'interface', 
 		'intersect', 
@@ -167,6 +171,7 @@ export const language = <ILanguage>{
 		'local', 
 		'localparam', 
 		'logic', 
+		'longint',
 		'macromodule', 
 		'matches', 
 		'medium', 
@@ -200,15 +205,18 @@ export const language = <ILanguage>{
 		'pull1', 
 		'pulldown', 
 		'pullup', 
-		'pulsestyle_on-detect', 
-		'pulsestyle_on-event',
+		'pulsestyle_ondetect', 
+		'pulsestyle_onevent',
 		'pure', 
 		'rand', 
 		'randc', 
 		'randcase', 
 		'randsequence', 
 		'rcmos', 
+		'real',
+		'realtime',
 		'ref', 
+		'reg',
 		'reject_on',
 		'release', 
 		'repeat', 
@@ -226,6 +234,8 @@ export const language = <ILanguage>{
 		's_until_with', 
 		'scalared', 
 		'sequence', 
+		'shortint',
+		'shortreal',
 		'showcancelled', 
 		'signed', 
 		'small',
@@ -234,6 +244,7 @@ export const language = <ILanguage>{
 		'specify', 
 		'specparam', 
 		'static', 
+		'string',
 		'strong', 
 		'strong0', 
 		'strong1', 
@@ -287,18 +298,7 @@ export const language = <ILanguage>{
 		'within', 
 		'wor', 
 		'xnor', 
-		'xor',
-		'bit', 
-		'byte', 
-		'int', 
-		'integer', 
-		'longint', 
-		'real', 
-		'realtime', 
-		'reg',
-		'shortint', 
-		'shortreal', 
-		'string'
+		'xor'
 	],
 
 	operators: [
@@ -310,7 +310,7 @@ export const language = <ILanguage>{
 	],
 
 	// we include these common regular expressions
-	symbols: /[=><!~?:&|+\-*\/\^%_]+/,
+	symbols: /[=><!~?:&|+\-*\/\^%]+/,
 	escapes: /\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})/,
 	integersuffix: /(ll|LL|u|U|l|L)?(ll|LL|u|U|l|L)?/,
 	floatsuffix: /[fFlL]?/,
@@ -323,7 +323,7 @@ export const language = <ILanguage>{
 			[/@encoding?R\"(?:([^ ()\\\t]*))\(/, { token: 'string.raw.begin', next: '@raw.$1' }],
 
 			// identifiers and keywords
-			[/[a-zA-Z_]\w*/, {
+			[/[a-z_]\w*/, {
 				cases: {
 					'@keywords': { token: 'keyword.$0' },
 					'@default': 'identifier'
