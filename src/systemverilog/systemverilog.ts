@@ -35,8 +35,10 @@ export const conf: IRichLanguageConfiguration = {
 	folding: {
 		offSide: false,
 		markers: {
-			start: new RegExp("^\\s*((((initial\\s|always(.*)\\s)?begin)|((.*)?case(x|z)?)|class|clocking|config|covergroup|function|generate|interface|module|package|primitive|property|program|sequence|specify|table|task)\\b)"),
-			end: new RegExp("^\\s*((end|endcase|endclass|endclocking|endconfig|endgroup|endfunction|endgenerate|endinterface|endmodule|endpackage|endprimitive|endproperty|endprogram|endsequence|endspecify|endtable|endtask)\\b)")
+			// start: new RegExp("^\\s*(((initial\\s|always(.*)\\s)?begin)|(case(x|z)?)|(class)|(clocking)|(config)|(covergroup)|(function)|(generate)|(interface)|(module)|(package)|(primitive)|(property)|(program)|(sequence)|(specify)|(table)|(task)\\b)"),
+			// end: new RegExp("^\\s*((end)|(endcase)|(endclass)|(endclocking)|(endconfig)|(endgroup)|(endfunction)|(endgenerate)|(endinterface)|(endmodule)|(endpackage)|(endprimitive)|(endproperty)|(endprogram)|(endsequence)|(endspecify)|(endtable)|(endtask)\\b)")
+			start: new RegExp("^\\s*(((.*\\s)?begin)|(.*\\s)?case(x|z)?|class|clocking|config|covergroup|function|generate|interface|module|package|primitive|property|program|sequence|specify|table|task)\\b"),
+			end: new RegExp("^\\s*(end|endcase|endclass|endclocking|endconfig|endgroup|endfunction|endgenerate|endinterface|endmodule|endpackage|endprimitive|endproperty|endprogram|endsequence|endspecify|endtable|endtask)\\b")
 		}
 	}
 };
