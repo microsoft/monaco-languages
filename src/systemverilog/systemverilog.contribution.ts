@@ -9,7 +9,7 @@ import { registerLanguage } from '../_.contribution';
 registerLanguage({
 	id: 'systemverilog',
 	extensions: ['.sv', '.svh'],
-	aliases: ['SV', 'sv'],
+	aliases: ['SV', 'sv', 'SystemVerilog', 'systemverilog'],
 	loader: () => import('./systemverilog')
 });
 
@@ -17,7 +17,7 @@ registerLanguage({
 registerLanguage({
 	id: 'verilog',
 	extensions: ['.v', '.vh'],
-	aliases: ['V', 'v'],
+	aliases: ['V', 'v', 'Verilog', 'verilog'],
 	loader: () => import('./systemverilog')
 });
 
