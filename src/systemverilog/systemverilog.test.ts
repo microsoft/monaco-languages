@@ -41,6 +41,26 @@ testTokenization('systemverilog', [
 		]
 	}],
 
+	// Keywords -- System Calls
+	[{
+		line: '$cast(); $ddisplay(); $display(" $display $cast");',
+		tokens: [
+			{ startIndex: 0,  type: 'keyword.$cast.sv'},
+            		{ startIndex: 5,  type: 'delimiter.parenthesis.sv'},
+            		{ startIndex: 7,  type: 'delimiter.sv'},
+            		{ startIndex: 8,  type: ''},
+            		{ startIndex: 9,  type: 'identifier.sv'},
+            		{ startIndex: 18, type: 'delimiter.parenthesis.sv'},
+            		{ startIndex: 20, type: 'delimiter.sv'},
+            		{ startIndex: 21, type: ''},
+            		{ startIndex: 22,  type: 'keyword.$display.sv'},
+            		{ startIndex: 30, type: 'delimiter.parenthesis.sv'},
+            		{ startIndex: 31, type: 'string.sv'},
+            		{ startIndex: 48, type: 'delimiter.parenthesis.sv'},
+            		{ startIndex: 49,  type: 'delimiter.sv'}
+		]
+	}],
+
 	[{
 		line: 'assign enable = set & interrupt;',
 		tokens: [
@@ -111,4 +131,7 @@ testTokenization('systemverilog', [
 			{ startIndex: 21, type: 'delimiter.curly.sv'}
 		]
 	}]
+
+	
+
 ]);
