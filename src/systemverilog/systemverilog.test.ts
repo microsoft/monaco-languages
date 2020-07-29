@@ -477,6 +477,111 @@ testTokenization('systemverilog', [
 		]
 	}],
 
+  	// Strings
+	[{
+		line: 'pdisplay ("display msg");',
+		tokens: [
+			{ startIndex: 0, type: 'identifier.sv'},
+			{ startIndex: 8, type: ''},
+			{ startIndex: 9,  type: 'delimiter.parenthesis.sv'},
+			{ startIndex: 10, type: 'string.sv'},
+			{ startIndex: 22,  type: 'string.escape.sv'},
+			{ startIndex: 23,  type: 'delimiter.parenthesis.sv'},
+			{ startIndex: 24, type: 'delimiter.sv'},
+		]
+	}],
+	[{
+		line: '"multi\n line\n string"',
+		tokens: [
+			{ startIndex: 0, type: 'string.sv'},
+			{ startIndex: 6, type: 'string.escape.sv'},
+			{ startIndex: 8, type: 'string.sv'},
+			{ startIndex: 13, type: 'string.escape.sv'},
+			{ startIndex: 15, type: 'string.sv'},
+			{ startIndex: 22,  type: 'string.escape.sv'},
+		]
+	}],
+	[{
+		line: 'pdisplay ("%s : %d\n", c.name, c );',
+		tokens: [
+			{ startIndex: 0, type: 'identifier.sv'},
+			{ startIndex: 8, type: ''},
+			{ startIndex: 9,  type: 'delimiter.parenthesis.sv'},
+			{ startIndex: 10, type: 'string.sv'},
+			{ startIndex: 18, type: 'string.escape.sv'},
+			{ startIndex: 21, type: 'delimiter.sv'},
+			{ startIndex: 22, type: ''},
+			{ startIndex: 23, type: 'identifier.sv'},
+			{ startIndex: 24, type: 'delimiter.sv'},
+			{ startIndex: 25, type: 'identifier.sv'},
+			{ startIndex: 29, type: 'delimiter.sv'},
+			{ startIndex: 30, type: ''},
+			{ startIndex: 31, type: 'identifier.sv'},
+			{ startIndex: 32, type: ''},
+			{ startIndex: 33,  type: 'delimiter.parenthesis.sv'},
+			{ startIndex: 34, type: 'delimiter.sv'},
+		]
+	}],
+	[{
+		line: 'var lexvar = "Color is \xddblue";',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.var.sv'},
+			{ startIndex: 3, type: ''},
+			{ startIndex: 4, type: 'identifier.sv'},
+			{ startIndex: 10, type: ''},
+			{ startIndex: 11, type: 'delimiter.sv'},
+			{ startIndex: 12, type: ''},
+			{ startIndex: 13, type: 'string.sv'},
+			{ startIndex: 23, type: 'string.escape.sv'},
+			{ startIndex: 27, type: 'string.sv'},
+			{ startIndex: 32,  type: 'string.escape.sv'},
+		]
+	}],
+	[{
+		line: '"Valid escapes \b \f \v"',
+		tokens: [
+			{ startIndex: 0, type: 'string.sv'},
+			{ startIndex: 15, type: 'string.escape.sv'},
+			{ startIndex: 17, type: 'string.sv'},
+			{ startIndex: 18, type: 'string.escape.sv'},
+			{ startIndex: 20, type: 'string.sv'},
+			{ startIndex: 21,  type: 'string.escape.sv'},
+		]
+	}],
+	[{
+		line: '"Valid escapes \o \j \z"',
+		tokens: [
+			{ startIndex: 0, type: 'string.sv'},
+			{ startIndex: 15, type: 'string.escape.invalid.sv'},
+			{ startIndex: 17, type: 'string.sv'},
+			{ startIndex: 18, type: 'string.escape.invalid.sv'},
+			{ startIndex: 20, type: 'string.sv'},
+			{ startIndex: 21,  type: 'string.escape.invalid.sv'},
+			{ startIndex: 23,  type: 'string.escape.sv'},
+		]
+	}],
+	[{
+		line: 'bit [8*12:1] stringvar = "Hello world\n";',
+		tokens: [
+			{ startIndex: 0,  type: 'keyword.bit.sv'},
+			{ startIndex: 3, type: ''},
+			{ startIndex: 4,  type: 'delimiter.square.sv'},
+			{ startIndex: 5, type: 'number.sv'},
+			{ startIndex: 6,  type: 'delimiter.sv'},
+			{ startIndex: 7, type: 'number.sv'},
+			{ startIndex: 9,  type: 'delimiter.sv'},
+			{ startIndex: 10, type: 'number.sv'},
+			{ startIndex: 11,  type: 'delimiter.square.sv'},
+			{ startIndex: 12, type: ''},
+			{ startIndex: 13, type: 'identifier.sv'},
+			{ startIndex: 22, type: ''},
+			{ startIndex: 23,  type: 'delimiter.sv'},
+			{ startIndex: 24, type: ''},
+			{ startIndex: 25, type: 'string.sv'},
+			{ startIndex: 37, type: 'string.escape.sv'},
+			{ startIndex: 40, type: 'delimiter.sv'},
+		]
+	}],
 	// Comments
 	[{
 		line: '//',
