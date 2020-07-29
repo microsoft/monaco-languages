@@ -339,7 +339,7 @@ export const language = <ILanguage>{
 			[/^\s*`include/, { token: 'keyword.directive.include', next: '@include' }],
 
 			// Preprocessor directive
-			[/^\s*#\s*\w+/, 'keyword'],
+			[/^\s*`\s*\w+/, 'keyword'],
 
 			// delimiters and operators
 			[/[{}()\[\]]/, '@brackets'],
@@ -411,8 +411,8 @@ export const language = <ILanguage>{
 		],
 
 		include: [
-			[/(\s*)(")(\w*.\w*)(")/, ['', 'keyword.directive.include.begin', 'string.include.identifier', { token: 'keyword.directive.include.end', next: '@pop'}]],
-			[/(\s*)(")([\w*\/]*)(.\w*)(")/, ['', 'keyword.directive.include.begin', 'string.include.identifier', 'string.include.identifier', { token: 'keyword.directive.include.end', next: '@pop'}]]
+			[/(\s*)(")([\w*\/*]*)(.\w*)(")/, ['', 'string.include.identifier', 'string.include.identifier', 'string.include.identifier', { token: 'string.include.identifier', next: '@pop'}]],
+			[/(\s*)(<)([\w*\/*]*)(.\w*)(>)/, ['', 'string.include.identifier', 'string.include.identifier', 'string.include.identifier', { token: 'string.include.identifier', next: '@pop'}]]
 		]
 	},
 };

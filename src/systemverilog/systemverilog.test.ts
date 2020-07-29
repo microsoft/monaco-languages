@@ -160,4 +160,142 @@ testTokenization('systemverilog', [
 			{ startIndex: 24, type: 'keyword.directive.include.end.sv'}
 		]
 	}],
+
+	// Preprocessor Directives
+	[{
+		line: '`__FILE__',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: 'identifier.sv'}
+		]
+	}, {
+		line: '      `begin_keywords',
+		tokens: [
+			{ startIndex: 0, type: ''},
+			{ startIndex: 6, type: 'keyword.sv'},
+			{ startIndex: 7, type: 'identifier.sv'}
+		]
+	}, {
+		line: '`define wordsize 8',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: 'identifier.sv'},
+			{ startIndex: 7, type: ''},
+			{ startIndex: 8, type: 'identifier.sv'},
+			{ startIndex: 16, type: ''},
+			{ startIndex: 17, type: 'number.sv'}
+		]
+	}, {
+		line: '`      else',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: ''},
+			{ startIndex: 7, type: 'identifier.sv'}
+		]
+	}, {
+		line: '`timescale 1ns/1ps',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: 'identifier'},
+			{ startIndex: 10, type: ''},
+			{ startIndex: 11, type: 'number.sv'},
+			{ startIndex: 12, type: 'identifier.sv'}
+		]
+	}, {
+		line: '`timescale 1 ns / 1 ps',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: 'identifier'},
+			{ startIndex: 10, type: ''},
+			{ startIndex: 11, type: 'number.sv'},
+			{ startIndex: 12, type: ''},
+			{ startIndex: 13, type: 'identifier.sv'},
+			{ startIndex: 15, type: ''},
+			{ startIndex: 16, type: 'identifier.sv'},
+			{ startIndex: 17, type: ''},
+			{ startIndex: 18, type: 'number.sv'},
+			{ startIndex: 19, type: ''},
+			{ startIndex: 20, type: 'identifier.sv'},
+		]
+	}, {
+		line: '`MACRO (1, 2, 3)',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: 'identifier.sv'},
+			{ startIndex: 6, type: ''},
+			{ startIndex: 7, type: 'delimiter.parenthesis.sv'},
+			{ startIndex: 8, type: 'number.sv'},
+			{ startIndex: 9, type: 'delimiter.sv'},
+			{ startIndex: 10, type: ''},
+			{ startIndex: 11, type: 'number.sv'},
+			{ startIndex: 12, type: 'delimiter.sv'},
+			{ startIndex: 13, type: ''},
+			{ startIndex: 14, type: 'number.sv'},
+			{ startIndex: 15, type: 'delimiter.parenthesis.sv'},
+		]
+	}, {
+		line: '`ifdef wow',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: 'identifier.sv'},
+			{ startIndex: 6, type: ''},
+			{ startIndex: 7, type: 'identifier'}
+		]
+	}, {
+		line: '`ifndef SU_AGENT_PKG',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: 'identifier.sv'},
+			{ startIndex: 7, type: ''},
+			{ startIndex: 8, type: 'identifier.sv'}
+		]
+	}, {
+		line: '`endif // SU_AGENT_PKG',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: 'identifier.sv'},
+			{ startIndex: 6, type: ''},
+			{ startIndex: 7, type: 'comment.sv'}
+		]
+	}, {
+		line: '`pragma protect encoding=(enctype="raw")',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: 'identifier.sv'},
+			{ startIndex: 7, type: ''},
+			{ startIndex: 8, type: 'identifier.sv'},
+			{ startIndex: 15, type: ''},
+			{ startIndex: 16, type: 'identifier.sv'},
+			{ startIndex: 24, type: 'delimiter.sv'},
+			{ startIndex: 25, type: 'delimiter.parenthesis.sv'},
+			{ startIndex: 26, type: 'identifier.sv'},
+			{ startIndex: 33, type: 'delimiter.sv'},
+			{ startIndex: 34, type: 'string.sv'},
+			{ startIndex: 39, type: 'delimiter.parenthesis.sv'}
+		]
+	}, {
+		line: '`undef macro_name',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: 'identifier.sv'},
+			{ startIndex: 6, type: ''},
+			{ startIndex: 7, type: 'identifier.sv'}
+		]
+	}, {
+		line: '`celldefine    ',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: 'identifier,sv'},
+			{ startIndex: 11, type: ''}
+		]
+	}, {
+		line: '`default_nettype none',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.sv'},
+			{ startIndex: 1, type: 'identifier'},
+			{ startIndex: 16, type: ''},
+			{ startIndex: 17, type: 'identifier.sv'}
+		]
+	}]
+
 ]);
