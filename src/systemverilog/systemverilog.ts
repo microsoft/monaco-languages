@@ -301,6 +301,33 @@ export const language = <ILanguage>{
 		'xor'
 	],
 
+	builtin_gates: [
+		'and',
+		'nand',
+		'nor',
+		'or',
+		'xor',
+		'xnor',
+		'buf',
+		'not',
+		'bufif0',
+		'bufif1',
+		'notif1',
+		'notif0',
+		'cmos',
+		'nmos',
+		'pmos',
+		'rcmos',
+		'rnmos',
+		'rpmos',
+		'tran',
+		'tranif1',
+		'tranif0',
+		'rtran',
+		'rtranif1',
+		'rtranif0'
+  ],
+
 	operators: [
 		'=', '>', '<', '!', '~', '?', ':',
 		'==', '<=', '>=', '!=', '&&', '||', '++', '--',
@@ -315,6 +342,7 @@ export const language = <ILanguage>{
 	integersuffix: /(ll|LL|u|U|l|L)?(ll|LL|u|U|l|L)?/,
 	floatsuffix: /[fFlL]?/,
 	encoding: /u|u8|U|L/,
+	identifier: /(?:[a-zA-Z_][a-zA-Z0-9_$]*|\/\S+ )/,
 
 	// The main tokenizer for our languages
 	tokenizer: {
@@ -322,8 +350,17 @@ export const language = <ILanguage>{
 			// C++ 11 Raw String
 			[/@encoding?R\"(?:([^ ()\\\t]*))\(/, { token: 'string.raw.begin', next: '@raw.$1' }],
 
+			// module instances
+			[/^(\s*)(@identifier)/, ['', {
+				cases: {
+					'@builtin_gates': { token: 'keyword.$1', next: '@module_instance'},
+					'@keywords': { token: 'keyword.$1' },
+					'@default': { token: 'identifier', next: '@module_instance'}
+				}
+			}]],
+
 			// identifiers and keywords
-			[/[a-z_]\w*/, {
+			[/@identifier/, {
 				cases: {
 					'@keywords': { token: 'keyword.$0' },
 					'@default': 'identifier'
@@ -371,6 +408,14 @@ export const language = <ILanguage>{
 			[/'[^\\']'/, 'string'],
 			[/(')(@escapes)(')/, ['string', 'string.escape', 'string']],
 			[/'/, 'string.invalid']
+		],
+
+		module_instance: [
+			{ include: '@whitespace' },
+			// TODO - Need to fill out highlighting in the #(...) region
+			[/\#\(.*?\)/, ''],
+			[/@identifier/, 'type'],
+			[/[\(#;]/, '', '@pop'],
 		],
 
 		whitespace: [
