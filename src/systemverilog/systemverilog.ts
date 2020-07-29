@@ -63,7 +63,7 @@ export const language = <ILanguage>{
 		'final', 'first_match', 'for', 'force', 'foreach', 'forever', 'fork', 'forkjoin', 'function', 
 		'generate', 'genvar', 'global', 
 		'highz0', 'highz1', 
-		'if', 'iff', 'ifnone','ignore_bins', 'illegal_bins', 'implements', 'implies', 'import', 'incdir', 'include', 'initial', 'inout', 'input', 'inside', 
+		'if', 'iff', 'ifnone', 'ignore_bins', 'illegal_bins', 'implements', 'implies', 'import', 'incdir', 'include', 'initial', 'inout', 'input', 'inside', 
 		'instance', 'int', 'integer', 'interconnect', 'interface', 'intersect', 
 		'join', 'join_any', 'join_none', 
 		'large', 'let', 'liblist', 'library', 'local', 'localparam', 'logic', 'longint',
