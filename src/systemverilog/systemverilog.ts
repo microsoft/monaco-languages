@@ -33,9 +33,10 @@ export const conf: IRichLanguageConfiguration = {
 		{ open: '\'', close: '\'' },
 	],
 	folding: {
+		offSide: false,
 		markers: {
-			start: new RegExp("^\\s*#pragma\\s+region\\b"),
-			end: new RegExp("^\\s*#pragma\\s+endregion\\b")
+			start: new RegExp("^(?:\\s*|.*(?!\\/[\\/\\*])[^\\w])(?:begin|case(x|z)?|class|clocking|config|covergroup|function|generate|interface|module|package|primitive|property|program|sequence|specify|table|task)\\b"),
+			end: new RegExp("^(?:\\s*|.*(?!\\/[\\/\\*])[^\\w])(?:end|endcase|endclass|endclocking|endconfig|endgroup|endfunction|endgenerate|endinterface|endmodule|endpackage|endprimitive|endproperty|endprogram|endsequence|endspecify|endtable|endtask)\\b")
 		}
 	}
 };
@@ -401,11 +402,12 @@ export const language = <ILanguage>{
 			// numbers
 			[/\d*\d+[eE]([\-+]?\d+)?(@floatsuffix)/, 'number.float'],
 			[/\d*\.\d+([eE][\-+]?\d+)?(@floatsuffix)/, 'number.float'],
-			[/0[xX][0-9a-fA-F']*[0-9a-fA-F](@integersuffix)/, 'number.hex'],
-			[/0[0-7']*[0-7](@integersuffix)/, 'number.octal'],
-			[/0[bB][0-1']*[0-1](@integersuffix)/, 'number.binary'],
-			[/\d[\d']*\d(@integersuffix)/, 'number'],
-			[/\d(@integersuffix)/, 'number'],
+			[/[\dxXzZ]+[_\dxXzZ]*/, 'number'],
+			[/'[sS]?[dD][0-9xXzZ?]+[0-9xXzZ_?]*/, 'number'],
+			[/'[sS]?[bB][0-1xXzZ?]+[0-1xXzZ_?]*/, 'number.binary'],
+			[/'[sS]?[oO][0-7xXzZ?]+[0-7xXzZ_?]*/, 'number.octal'],
+			[/'[sS]?[hH][0-9a-fA-FxXzZ?]+[0-9a-fA-FxXzZ_?]*/, 'number.hex'],
+
 
 			// delimiter: after number because of .\d floats
 			[/[;,.]/, 'delimiter'],
