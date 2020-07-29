@@ -146,7 +146,7 @@ export const language = <ILanguage>{
 	integersuffix: /(ll|LL|u|U|l|L)?(ll|LL|u|U|l|L)?/,
 	floatsuffix: /[fFlL]?/,
 	encoding: /u|u8|U|L/,
-	identifier: /(?:[a-zA-Z_][a-zA-Z0-9_$]*|\/\S+ )/,
+	identifier: /(?:[a-zA-Z_][a-zA-Z0-9_$\.]*|\\\S+ )/,
 
 	// The main tokenizer for our languages
 	tokenizer: {
