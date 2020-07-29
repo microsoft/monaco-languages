@@ -597,7 +597,36 @@ testTokenization('systemverilog', [
 			{ startIndex: 4, type: 'comment.sv' },
 			{ startIndex: 8, type: 'delimiter.sv' }
 		]
-	}]
+	}],
 
+	// Doxygen Comments
+	[{
+        line: '//! @param',
+        tokens: [
+            { startIndex: 0, type: 'comment.sv' }
+        ]
+    }],
+
+	[{
+        line: '//!< @param',
+        tokens: [
+            { startIndex: 0, type: 'comment.sv' }
+        ]
+	}],
+
+	// Multiline Comments
+	[{
+		line: '/* temp_byte = data[0:7]; \n m_buffer.push_back(temp_byte) */',
+		tokens: [
+			{ startIndex: 0, type: 'comment.sv'}
+		]
+	}],
+
+	[{
+		line: '/* a = b; \n b = c; \n c = d */',
+		tokens: [
+			{ startIndex: 0, type: 'comment.sv'}
+		]
+	}]
 ]);
 
