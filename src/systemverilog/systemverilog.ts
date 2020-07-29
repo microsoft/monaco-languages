@@ -163,11 +163,12 @@ export const language = <ILanguage>{
 			[/\/\/.*$/, 'comment'],
 		],
 
-		comment: [
-			[/[^\/*]+/, 'comment'],
-			[/\*\//, 'comment', '@pop'],
-			[/[\/*]/, 'comment']
+	    comment: [
+				[/[^\/*]+/, 'comment'],
+				[/\*\//, 'comment', '@pop'],
+				[/[\/*]/, 'comment']
 		],
+
 		//Identical copy of comment above, except for the addition of .doc
 		doccomment: [
 			[/[^\/*]+/, 'comment.doc'],
