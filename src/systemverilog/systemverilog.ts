@@ -132,11 +132,28 @@ export const language = <ILanguage>{
   ],
 
 	operators: [
-		'=', '>', '<', '!', '~', '?', ':',
-		'==', '<=', '>=', '!=', '&&', '||', '++', '--',
-		'+', '-', '*', '/', '&', '|', '^', '%', '<<',
-		'>>', '>>>', '+=', '-=', '*=', '/=', '&=', '|=',
-		'^=', '%=', '<<=', '>>=', '>>>='
+        // assignment operators
+        '=', '+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=',
+        '>>+', '<<<=', '>>>=',
+        // conditional expression
+        '?', ':',
+        // Unary operators
+        '+', '-', '!', '~', '&', '~&', '|', '~|', '^', '~^', '^~',
+        //binary operators
+        '+', '-', '*', '/', '%', '==', '!=', '===', '!==', '==?',
+        '!=?', '&&', '||', '**', '<', '<=', '>', '>=', '&', '|', '^',
+        '>>', '<<', '>>>', '<<<',
+        // increment or decrement operator
+        '++', '--',
+        //binary logical operator
+        '->', '<->',
+        // binary set membership operator
+        'inside',
+        // binary distrubution operator
+        'dist',
+        '::', '+:', '-:', '*>', '&&&',
+        '|->', '|=>',
+        '#=#'
 	],
 
 	// we include these common regular expressions

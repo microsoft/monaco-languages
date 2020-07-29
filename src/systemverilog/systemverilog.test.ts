@@ -42,6 +42,57 @@ testTokenization('systemverilog', [
 	}],
 
 	[{
+		line: 'a !== b',
+		tokens: [
+			{ startIndex: 0, type: 'identifier.sv'},
+			{ startIndex: 1, type: ''},
+			{ startIndex: 2, type: 'delimiter.sv'},
+			{ startIndex: 5, type: ''},
+			{ startIndex: 6, type: 'identifier.sv'}
+		]
+	}],
+
+	[{
+		line: '!n',
+		tokens: [
+			{ startIndex: 0, type: 'delimiter.sv'},
+			{ startIndex: 1, type: 'identifier.sv'}
+		]
+	}],
+
+	[{
+		line: 'assign r = c + i;',
+		tokens: [
+			{ startIndex: 0, type: 'keyword.assign.sv'},
+			{ startIndex: 6, type : ''},
+			{ startIndex: 7, type: 'identifier.sv'},
+			{ startIndex: 8, type : ''},
+			{ startIndex: 9, type : 'delimiter.sv'},
+			{ startIndex: 10, type : ''},
+			{ startIndex: 11, type : 'identifier.sv'},
+			{ startIndex: 12, type : ''},
+			{ startIndex: 13, type : 'delimiter.sv'},
+			{ startIndex: 14, type : ''},
+			{ startIndex: 15, type : 'identifier.sv'},
+			{ startIndex: 16, type : 'delimiter.sv'}
+		]
+	}],
+
+	[{
+		line: 'assert(req1 || req2)',
+		tokens: [
+			{ startIndex: 0, type : 'keyword.assert.sv'},
+			{ startIndex: 6, type : 'delimiter.parenthesis.sv'},
+			{ startIndex: 7, type : 'identifier.sv'},
+			{ startIndex: 11, type : ''},
+			{ startIndex: 12, type : 'delimiter.sv'},
+			{ startIndex: 14, type : ''},
+			{ startIndex: 15, type : 'identifier.sv'},
+			{ startIndex: 19, type : 'delimiter.parenthesis.sv'}
+		]
+	}],
+
+	[{
 		line: 'assign enable = set & interrupt;',
 		tokens: [
 			{ startIndex: 0,  type: 'keyword.assign.sv'},
@@ -58,6 +109,72 @@ testTokenization('systemverilog', [
 			{ startIndex: 31, type: 'delimiter.sv'}
 		]
 	}],
+
+	[{
+		line: 'arrayB[i][j+:2] == arrayA[k][m-:2]',
+		tokens: [
+			{ startIndex: 0,  type : 'identifier.sv'},
+			{ startIndex: 6,  type : 'delimiter.square.sv'},
+			{ startIndex: 7,  type : 'identifier.sv'},
+			{ startIndex: 8,  type : 'delimiter.square.sv'},
+			{ startIndex: 10, type : 'identifier.sv'},
+			{ startIndex: 11, type : 'delimiter.sv'},
+			{ startIndex: 13, type : 'number.sv'},
+			{ startIndex: 14, type : 'delimiter.square.sv'},
+			{ startIndex: 15, type : ''},
+			{ startIndex: 16, type : 'delimiter.sv'},
+			{ startIndex: 18, type : ''},
+			{ startIndex: 19, type : 'identifier.sv'},
+			{ startIndex: 25, type : 'delimiter.square.sv'},
+			{ startIndex: 26, type : 'identifier.sv'},
+			{ startIndex: 27, type : 'delimiter.square.sv'},
+			{ startIndex: 29, type : 'identifier.sv'},
+			{ startIndex: 30, type : 'delimiter.sv'},
+			{ startIndex: 32, type : 'number.sv'},
+			{ startIndex: 33, type : 'delimiter.square.sv'}
+		]
+	}],
+
+	[{
+		line: 'assert property (@(clk) go ##1 get[*2] |-> !stop throughout put[->2]);',
+		tokens: [
+			{ startIndex: 0,  type : 'keyword.assert.sv'},
+			{ startIndex: 6, type: '' },
+			{ startIndex: 7, type: 'keyword.property.sv' },
+			{ startIndex: 15, type: '' },
+			{ startIndex: 16, type: 'delimiter.parenthesis.sv' },
+			{ startIndex: 17, type: '' },
+			{ startIndex: 18, type: 'delimiter.parenthesis.sv' },
+			{ startIndex: 19, type: 'identifier.sv' },
+			{ startIndex: 22, type: 'delimiter.parenthesis.sv' },
+			{ startIndex: 23, type: '' },
+			{ startIndex: 24, type: 'identifier.sv' },
+			{ startIndex: 26, type: '' },
+			{ startIndex: 29, type: 'number.sv' },
+			{ startIndex: 30, type: '' },
+			{ startIndex: 31, type: 'identifier.sv' },
+			{ startIndex: 34, type: 'delimiter.square.sv' },
+			{ startIndex: 35, type: 'delimiter.sv' },
+			{ startIndex: 36, type: 'number.sv' },
+			{ startIndex: 37, type: 'delimiter.square.sv' },
+			{ startIndex: 38, type: '' },
+			{ startIndex: 39, type: 'delimiter.sv' },
+			{ startIndex: 42, type: '' },
+			{ startIndex: 43, type: 'delimiter.sv' },
+			{ startIndex: 44, type: 'identifier.sv' },
+			{ startIndex: 48, type: '' },
+			{ startIndex: 49, type: 'keyword.throughout.sv' },
+			{ startIndex: 59, type: '' },
+			{ startIndex: 60, type: 'identifier.sv' },
+			{ startIndex: 63, type: 'delimiter.square.sv' },
+			{ startIndex: 64, type: 'delimiter.sv' },
+			{ startIndex: 66, type: 'number.sv' },
+			{ startIndex: 67, type: 'delimiter.square.sv' },
+			{ startIndex: 68, type: 'delimiter.parenthesis.sv' },
+			{ startIndex: 69, type: 'delimiter.sv' }
+		]
+	}],
+
 
 	[{
 		line: 'always_ff @(posedge clk) gnt <= req & avail;',
