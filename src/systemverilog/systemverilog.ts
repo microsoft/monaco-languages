@@ -38,7 +38,6 @@ export const conf: IRichLanguageConfiguration = {
 		['sequence', 'endsequence'], 
 		['table', 'endtable'], 
 		['task', 'endtask'], 
-		
 	],
 	autoClosingPairs: [
 		{ open: '[', close: ']' },
@@ -79,7 +78,7 @@ export const language = <ILanguage>{
 		'before', 'begin', 'bind','bins', 'binsof', 'bit','break', 'buf', 'bufif0', 'bufif1', 'byte',
 		'case', 'casex', 'casez', 'cell', 'chandle', 'checker', 'class', 'clocking', 'cmos', 'config', 'const', 'constraint', 'context', 'continue',
 		'cover', 'covergroup', 'coverpoint', 'cross', 
-		'deassign', 'default', 'defparam', 'design', 'disable', 'dist','do', 
+		'deassign', 'default', 'defparam', 'design', 'disable', 'dist', 'do', 
 		'edge', 'else', 'end', 'endcase', 'endchecker', 'endclass', 'endclocking', 'endconfig', 'endfunction', 'endgenerate', 'endgroup', 'endinterface', 'endmodule', 'endpackage',
 		'endprimitive', 'endprogram', 'endproperty', 'endspecify', 'endsequence', 'endtable', 'endtask', 'enum', 'event', 'eventually', 'expect', 'export', 'extends', 'extern',
 		'final', 'first_match', 'for', 'force', 'foreach', 'forever', 'fork', 'forkjoin', 'function', 
@@ -147,6 +146,7 @@ export const language = <ILanguage>{
 	floatsuffix: /[fFlL]?/,
 	encoding: /u|u8|U|L/,
 	identifier: /(?:[a-zA-Z_][a-zA-Z0-9_$\.]*|\\\S+ )/,
+	systemcall: /[$][a-zA-Z0-9]+/,
 
 	// The main tokenizer for our languages
 	tokenizer: {
@@ -178,6 +178,9 @@ export const language = <ILanguage>{
 			[/\[\[.*\]\]/, 'annotation'],
 
 			[/^\s*`include/, { token: 'keyword.directive.include', next: '@include' }],
+
+			// Systemcall
+			[/@systemcall/, 'variable.predefined'],
 
 			// Preprocessor directive
 			[/^\s*`\s*\w+/, 'keyword'],
@@ -220,7 +223,7 @@ export const language = <ILanguage>{
 			// TODO - Need to fill out highlighting in the #(...) region
 			[/\#\(.*?\)/, ''],
 			[/@identifier/, 'type'],
-			[/[\(#;]/, '', '@pop'],
+			[/@symbols/, '', '@pop'],
 		],
 
 		whitespace: [
