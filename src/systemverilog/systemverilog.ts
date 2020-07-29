@@ -129,41 +129,39 @@ export const language = <ILanguage>{
 		'rtran',
 		'rtranif1',
 		'rtranif0'
-  ],
+	],
 
 	operators: [
-        // assignment operators
-        '=', '+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=',
-        '>>+', '<<<=', '>>>=',
-        // conditional expression
-        '?', ':',
-        // Unary operators
-        '+', '-', '!', '~', '&', '~&', '|', '~|', '^', '~^', '^~',
-        //binary operators
-        '+', '-', '*', '/', '%', '==', '!=', '===', '!==', '==?',
-        '!=?', '&&', '||', '**', '<', '<=', '>', '>=', '&', '|', '^',
-        '>>', '<<', '>>>', '<<<',
-        // increment or decrement operator
-        '++', '--',
-        //binary logical operator
-        '->', '<->',
-        // binary set membership operator
-        'inside',
-        // binary distrubution operator
-        'dist',
-        '::', '+:', '-:', '*>', '&&&',
-        '|->', '|=>',
-        '#=#'
+		// assignment operators
+		'=', '+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=',
+		'>>+', '<<<=', '>>>=',
+		// conditional expression
+		'?', ':',
+		// Unary operators
+		'+', '-', '!', '~', '&', '~&', '|', '~|', '^', '~^', '^~',
+		//binary operators
+		'+', '-', '*', '/', '%', '==', '!=', '===', '!==', '==?',
+		'!=?', '&&', '||', '**', '<', '<=', '>', '>=', '&', '|', '^',
+		'>>', '<<', '>>>', '<<<',
+		// increment or decrement operator
+		'++', '--',
+		//binary logical operator
+		'->', '<->',
+		// binary set membership operator
+		'inside',
+		// binary distrubution operator
+		'dist',
+		'::', '+:', '-:', '*>', '&&&',
+		'|->', '|=>',
+		'#=#'
 	],
 
 	// we include these common regular expressions
 	symbols: /[=><!~?:&|+\-*\/\^%]+/,
-	escapes: /(%%)|\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8}|[xd]dd)/,
-	integersuffix: /(ll|LL|u|U|l|L)?(ll|LL|u|U|l|L)?/,
-	floatsuffix: /[fFlL]?/,
-	encoding: /u|u8|U|L/,
+	escapes: /%%|\\(?:[antvf\\"']|x[0-9A-Fa-f]{1,2}|[0-7]{1,3})/,
 	identifier: /(?:[a-zA-Z_][a-zA-Z0-9_$\.]*|\\\S+ )/,
-	systemcall: /[$][a-zA-Z0-9]+/,
+	systemcall: /[\$][a-zA-Z0-9]+/,
+	timeunits: /s|ms|us|ns|ps|fs/,
 
 	// The main tokenizer for our languages
 	tokenizer: {
@@ -231,13 +229,14 @@ export const language = <ILanguage>{
 		],
 
 		numbers: [
-			[/\d*\d+[eE]([\-+]?\d+)?(@floatsuffix)/, 'number.float'],
-			[/\d*\.\d+([eE][\-+]?\d+)?(@floatsuffix)/, 'number.float'],
-			[/[\dxXzZ]+[_\dxXzZ]*/, 'number'],
-			[/'[sS]?[dD][0-9xXzZ?]+[0-9xXzZ_?]*/, 'number'],
-			[/'[sS]?[bB][0-1xXzZ?]+[0-1xXzZ_?]*/, 'number.binary'],
-			[/'[sS]?[oO][0-7xXzZ?]+[0-7xXzZ_?]*/, 'number.octal'],
-			[/'[sS]?[hH][0-9a-fA-FxXzZ?]+[0-9a-fA-FxXzZ_?]*/, 'number.hex'],
+			[/\d+?[\d_]*(?:\.[\d_]+)?[eE][\-+]?\d+/, 'number.float'],
+			[/\d+?[\d_]*\.[\d_]+(?:\s*@timeunits)?/, 'number.float'],
+			[/[\dxXzZ]+?[\dxXzZ_]*(?:\s*@timeunits)?/, 'number'],
+			[/'[01xXzZ]+/, 'number'],
+			[/'[sS]?[dD]\s*[0-9xXzZ?]+?[0-9xXzZ?_]*/, 'number'],
+			[/'[sS]?[bB]\s*[0-1xXzZ?]+?[0-1xXzZ?_]*/, 'number.binary'],
+			[/'[sS]?[oO]\s*[0-7xXzZ?]+?[0-7xXzZ?_]*/, 'number.octal'],
+			[/'[sS]?[hH]\s*[0-9a-fA-FxXzZ?]+?[0-9a-fA-FxXzZ?_]*/, 'number.hex'],
 		],
 
 		module_instance: [
@@ -258,15 +257,14 @@ export const language = <ILanguage>{
 
 		whitespace: [
 			[/[ \t\r\n]+/, ''],
-			[/\/\*\*(?!\/)/, 'comment.doc', '@doccomment'],
 			[/\/\*/, 'comment', '@comment'],
 			[/\/\/.*$/, 'comment'],
 		],
 
 	    comment: [
-				[/[^\/*]+/, 'comment'],
-				[/\*\//, 'comment', '@pop'],
-				[/[\/*]/, 'comment']
+			[/[^\/*]+/, 'comment'],
+			[/\*\//, 'comment', '@pop'],
+			[/[\/*]/, 'comment']
 		],
 
 		string: [
