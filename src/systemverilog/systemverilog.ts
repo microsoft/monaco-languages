@@ -164,12 +164,7 @@ export const language = <ILanguage>{
 			}]],
 
 			// identifiers and keywords
-			[/@identifier/, {
-				cases: {
-					'@keywords': { token: 'keyword.$0' },
-					'@default': 'identifier'
-				}
-			}],
+			{ include: '@identifier_or_keyword' },
 
 			// whitespace
 			{ include: '@whitespace' },
@@ -196,14 +191,7 @@ export const language = <ILanguage>{
 			}],
 
 			// numbers
-			[/\d*\d+[eE]([\-+]?\d+)?(@floatsuffix)/, 'number.float'],
-			[/\d*\.\d+([eE][\-+]?\d+)?(@floatsuffix)/, 'number.float'],
-			[/[\dxXzZ]+[_\dxXzZ]*/, 'number'],
-			[/'[sS]?[dD][0-9xXzZ?]+[0-9xXzZ_?]*/, 'number'],
-			[/'[sS]?[bB][0-1xXzZ?]+[0-1xXzZ_?]*/, 'number.binary'],
-			[/'[sS]?[oO][0-7xXzZ?]+[0-7xXzZ_?]*/, 'number.octal'],
-			[/'[sS]?[hH][0-9a-fA-FxXzZ?]+[0-9a-fA-FxXzZ_?]*/, 'number.hex'],
-
+			{ include: '@numbers' },
 
 			// delimiter: after number because of .\d floats
 			[/[;,.]/, 'delimiter'],
@@ -218,12 +206,39 @@ export const language = <ILanguage>{
 			[/'/, 'string.invalid']
 		],
 
+		identifier_or_keyword: [
+			[/@identifier/, {
+				cases: {
+					'@keywords': { token: 'keyword.$0' },
+					'@default': 'identifier'
+				}
+			}],
+		],
+
+		numbers: [
+			[/\d*\d+[eE]([\-+]?\d+)?(@floatsuffix)/, 'number.float'],
+			[/\d*\.\d+([eE][\-+]?\d+)?(@floatsuffix)/, 'number.float'],
+			[/[\dxXzZ]+[_\dxXzZ]*/, 'number'],
+			[/'[sS]?[dD][0-9xXzZ?]+[0-9xXzZ_?]*/, 'number'],
+			[/'[sS]?[bB][0-1xXzZ?]+[0-1xXzZ_?]*/, 'number.binary'],
+			[/'[sS]?[oO][0-7xXzZ?]+[0-7xXzZ_?]*/, 'number.octal'],
+			[/'[sS]?[hH][0-9a-fA-FxXzZ?]+[0-9a-fA-FxXzZ_?]*/, 'number.hex'],
+		],
+
 		module_instance: [
 			{ include: '@whitespace' },
-			// TODO - Need to fill out highlighting in the #(...) region
-			[/\#\(.*?\)/, ''],
+			[/@symbols/, {token: '@rematch', next: '@pop'}],
 			[/@identifier/, 'type'],
-			[/@symbols/, '', '@pop'],
+			[/\(/, '', '@port_connection'],
+			[/;/, '', '@pop'],
+		],
+
+		port_connection: [
+			{ include: '@identifier_or_keyword' },
+			{ include: '@whitespace' },
+			{ include: '@numbers' },
+			[/\(/, '', '@port_connection'],
+			[/\)/, '', '@pop'],
 		],
 
 		whitespace: [
