@@ -170,8 +170,8 @@ export const language = <ILanguage>{
 			// module instances
 			[/^(\s*)(@identifier)/, ['', {
 				cases: {
-					'@builtin_gates': { token: 'keyword.$1', next: '@module_instance'},
-					'@keywords': { token: 'keyword.$1' },
+					'@builtin_gates': { token: 'keyword.$0', next: '@module_instance'},
+					'@keywords': { token: 'keyword.$0' },
 					'@default': { token: 'identifier', next: '@module_instance'}
 				}
 			}]],
