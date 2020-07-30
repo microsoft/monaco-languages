@@ -107,10 +107,10 @@ testTokenization('systemverilog', [
 		line: 'arrayB[i][j+:2] == arrayA[k][m-:2]',
 		tokens: [
 			{ startIndex: 0,  type : 'identifier.sv'},
-			{ startIndex: 6,  type : ''},
-			{ startIndex: 7,  type : 'type.sv'},
-			{ startIndex: 8,  type : ''},
-			{ startIndex: 10, type : 'type.sv'},
+			{ startIndex: 6,  type : 'delimiter.square.sv'},
+			{ startIndex: 7,  type : 'identifier.sv'},
+			{ startIndex: 8,  type : 'delimiter.square.sv'},
+			{ startIndex: 10, type : 'identifier.sv'},
 			{ startIndex: 11, type : 'delimiter.sv'},
 			{ startIndex: 13, type : 'number.sv'},
 			{ startIndex: 14, type : 'delimiter.square.sv'},
@@ -557,10 +557,10 @@ testTokenization('systemverilog', [
 		tokens: [
 			{ startIndex: 0, type: 'identifier.sv'},
 			{ startIndex: 8, type: ''},
-			{ startIndex: 11, type: 'identifier.sv'},
-			{ startIndex: 18, type: ''},
-			{ startIndex: 19, type: 'identifier.sv' },
-			{ startIndex: 22,  type: ''}
+			{ startIndex: 10, type: 'string.sv'},
+			{ startIndex: 22, type: 'string.escape.sv' },
+			{ startIndex: 23,  type: ''},
+			{ startIndex: 24,  type: 'delimiter.sv' }
 		]
 	}],
 	[{
@@ -579,12 +579,14 @@ testTokenization('systemverilog', [
 		tokens: [
 			{ startIndex: 0, type: 'identifier.sv'},
 			{ startIndex: 8, type: ''},
-			{ startIndex: 12, type: 'identifier.sv' },
-			{ startIndex: 13, type: '' },
-			{ startIndex: 17, type: 'identifier.sv'},
+			{ startIndex: 10, type: 'string.sv' },
+			{ startIndex: 18, type: 'string.escape.sv' },
+			{ startIndex: 21, type: '' },
+			{ startIndex: 23, type: 'identifier.sv' },
 			{ startIndex: 29, type: ''},
 			{ startIndex: 31, type: 'identifier.sv'},
-			{ startIndex: 32, type: ''},
+			{ startIndex: 32, type: '' },
+			{ startIndex: 34, type: 'delimiter.sv' },
 		]
 	}],
 	[{
