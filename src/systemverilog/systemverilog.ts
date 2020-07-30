@@ -170,8 +170,8 @@ export const language = <ILanguage>{
 			// module instances
 			[/^(\s*)(@identifier)/, ['', {
 				cases: {
-					'@builtin_gates': { token: 'keyword.$0', next: '@module_instance'},
-					'@keywords': { token: 'keyword.$0' },
+					'@builtin_gates': { token: 'keyword.$2', next: '@module_instance'},
+					'@keywords': { token: 'keyword.$2' },
 					'@default': { token: 'identifier', next: '@module_instance'}
 				}
 			}]],
@@ -230,27 +230,29 @@ export const language = <ILanguage>{
 			[/(?:\d+?[\d_]*\s*)?'[sS]?[bB]\s*[0-1xXzZ?]+?[0-1xXzZ?_]*/, 'number.binary'],
 			[/(?:\d+?[\d_]*\s*)?'[sS]?[oO]\s*[0-7xXzZ?]+?[0-7xXzZ?_]*/, 'number.octal'],
 			[/(?:\d+?[\d_]*\s*)?'[sS]?[hH]\s*[0-9a-fA-FxXzZ?]+?[0-9a-fA-FxXzZ?_]*/, 'number.hex'],
-			[/[\dxXzZ]+?[\dxXzZ_]*(?:\s*@timeunits)?/, 'number'],
 			[/1step/, 'number'],
+			[/[\dxXzZ]+?[\dxXzZ_]*(?:\s*@timeunits)?/, 'number'],
 			[/'[01xXzZ]+/, 'number'],
 		],
 
 		module_instance: [
 			{ include: '@whitespace' },
-			[/#?\(/, '', '@port_connection'],
-			[/@identifier\s*[;={}\[\]]/, {token: '@rematch', next: '@pop'}],
-			[/@symbols|[;={}\[\]]/, {token: '@rematch', next: '@pop'}],
+			[/(#?)(\()/, ['', {token: '@brackets', next: '@port_connection'}]],
+			[/@identifier\s*[;={}\[\],]/, {token: '@rematch', next: '@pop'}],
+			[/@symbols|[;={}\[\],]/, {token: '@rematch', next: '@pop'}],
 			[/@identifier/, 'type'],
-			[/;/, '', '@pop'],
+			[/;/, 'delimiter', '@pop'],
 		],
 
 		port_connection: [
 			{ include: '@identifier_or_keyword' },
 			{ include: '@whitespace' },
+			[/@systemcall/, 'variable.predefined'],
 			{ include: '@numbers' },
 			{ include: '@strings'},
-			[/\(/, '', '@port_connection'],
-			[/\)/, '', '@pop'],
+			[/[,]/, 'delimiter'],
+			[/\(/, '@brackets', '@port_connection'],
+			[/\)/, '@brackets', '@pop'],
 		],
 
 		whitespace: [
@@ -274,7 +276,7 @@ export const language = <ILanguage>{
 			[/[^\\"]+/, 'string'],
 			[/@escapes/, 'string.escape'],
 			[/\\./, 'string.escape.invalid'],
-			[/"/, 'string.escape', '@pop'],
+			[/"/, 'string', '@pop']
 		],
 
 		include: [
