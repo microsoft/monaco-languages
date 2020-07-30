@@ -99,8 +99,8 @@ export const language = <ILanguage>{
 		'solve', 'specify', 'specparam', 'static', 'string', 'strong', 'strong0', 'strong1', 'struct', 'super', 'supply0', 'supply1', 'sync_accept_on', 'sync_reject_on',
 		'table', 'tagged', 'task', 'this', 'throughout', 'time', 'timeprecision', 'timeunit', 'tran', 'tranif0', 'tranif1', 'tri', 'tri0', 'tri1', 'triand', 'trior', 'trireg', 'type', 'typedef', 
 		'union', 'unique', 'unique0', 'unsigned','until', 'until_with', 'untyped', 'use', 'uwire', 
-		'var', 'vectored', 'virtual', 'void', 
-		'wait_order', 'wand', 'weak', 'weak0', 'weak1', 'while', 'wildcard', 'wire', 'with', 'within', 'wor', 
+		'var', 'vectored', 'virtual', 'void',
+		'wait', 'wait_order', 'wand', 'weak', 'weak0', 'weak1', 'while', 'wildcard', 'wire', 'with', 'within', 'wor', 
 		'xnor', 'xor'
 	],
 
@@ -160,7 +160,7 @@ export const language = <ILanguage>{
 	symbols: /[=><!~?:&|+\-*\/\^%]+/,
 	escapes: /%%|\\(?:[antvf\\"']|x[0-9A-Fa-f]{1,2}|[0-7]{1,3})/,
 	identifier: /(?:[a-zA-Z_][a-zA-Z0-9_$\.]*|\\\S+ )/,
-	systemcall: /[\$][a-zA-Z0-9]+/,
+	systemcall: /[$][a-zA-Z0-9_]+/,
 	timeunits: /s|ms|us|ns|ps|fs/,
 
 	// The main tokenizer for our languages
@@ -176,22 +176,23 @@ export const language = <ILanguage>{
 				}
 			}]],
 
+			// include statements
+			[/^\s*`include/, { token: 'keyword.directive.include', next: '@include' }],
+
+			// Preprocessor directives
+			[/^\s*`\s*\w+/, 'keyword'],
+
 			// identifiers and keywords
 			{ include: '@identifier_or_keyword' },
 
 			// whitespace
 			{ include: '@whitespace' },
 
-			// [[ attributes ]].
-			[/\[\[.*\]\]/, 'annotation'],
-
-			[/^\s*`include/, { token: 'keyword.directive.include', next: '@include' }],
+			// (* attributes *).
+			[/\(\*.*\*\)/, 'annotation'],
 
 			// Systemcall
 			[/@systemcall/, 'variable.predefined'],
-
-			// Preprocessor directive
-			[/^\s*`\s*\w+/, 'keyword'],
 
 			// delimiters and operators
 			[/[{}()\[\]]/, '@brackets'],
@@ -212,11 +213,6 @@ export const language = <ILanguage>{
 			// strings
 			[/"([^"\\]|\\.)*$/, 'string.invalid'],  // non-teminated string
 			[/"/, 'string', '@string'],
-
-			// characters
-			[/'[^\\']'/, 'string'],
-			[/(')(@escapes)(')/, ['string', 'string.escape', 'string']],
-			[/'/, 'string.invalid']
 		],
 
 		identifier_or_keyword: [
@@ -231,12 +227,12 @@ export const language = <ILanguage>{
 		numbers: [
 			[/\d+?[\d_]*(?:\.[\d_]+)?[eE][\-+]?\d+/, 'number.float'],
 			[/\d+?[\d_]*\.[\d_]+(?:\s*@timeunits)?/, 'number.float'],
+			[/(?:\d+?[\d_]*\s*)?'[sS]?[dD]\s*[0-9xXzZ?]+?[0-9xXzZ?_]*/, 'number'],
+			[/(?:\d+?[\d_]*\s*)?'[sS]?[bB]\s*[0-1xXzZ?]+?[0-1xXzZ?_]*/, 'number.binary'],
+			[/(?:\d+?[\d_]*\s*)?'[sS]?[oO]\s*[0-7xXzZ?]+?[0-7xXzZ?_]*/, 'number.octal'],
+			[/(?:\d+?[\d_]*\s*)?'[sS]?[hH]\s*[0-9a-fA-FxXzZ?]+?[0-9a-fA-FxXzZ?_]*/, 'number.hex'],
 			[/[\dxXzZ]+?[\dxXzZ_]*(?:\s*@timeunits)?/, 'number'],
 			[/'[01xXzZ]+/, 'number'],
-			[/'[sS]?[dD]\s*[0-9xXzZ?]+?[0-9xXzZ?_]*/, 'number'],
-			[/'[sS]?[bB]\s*[0-1xXzZ?]+?[0-1xXzZ?_]*/, 'number.binary'],
-			[/'[sS]?[oO]\s*[0-7xXzZ?]+?[0-7xXzZ?_]*/, 'number.octal'],
-			[/'[sS]?[hH]\s*[0-9a-fA-FxXzZ?]+?[0-9a-fA-FxXzZ?_]*/, 'number.hex'],
 		],
 
 		module_instance: [
