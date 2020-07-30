@@ -157,7 +157,7 @@ export const language = <ILanguage>{
 	],
 
 	// we include these common regular expressions
-	symbols: /[=><!~?:&|+\-*\/\^%]+/,
+	symbols: /[=><!~?:&|+\-*\/\^%#]+/,
 	escapes: /%%|\\(?:[antvf\\"']|x[0-9A-Fa-f]{1,2}|[0-7]{1,3})/,
 	identifier: /(?:[a-zA-Z_][a-zA-Z0-9_$\.]*|\\\S+ )/,
 	systemcall: /[$][a-zA-Z0-9_]+/,
@@ -211,8 +211,7 @@ export const language = <ILanguage>{
 			[/[;,.]/, 'delimiter'],
 
 			// strings
-			[/"([^"\\]|\\.)*$/, 'string.invalid'],  // non-teminated string
-			[/"/, 'string', '@string'],
+			{ include: '@strings' }
 		],
 
 		identifier_or_keyword: [
@@ -232,14 +231,16 @@ export const language = <ILanguage>{
 			[/(?:\d+?[\d_]*\s*)?'[sS]?[oO]\s*[0-7xXzZ?]+?[0-7xXzZ?_]*/, 'number.octal'],
 			[/(?:\d+?[\d_]*\s*)?'[sS]?[hH]\s*[0-9a-fA-FxXzZ?]+?[0-9a-fA-FxXzZ?_]*/, 'number.hex'],
 			[/[\dxXzZ]+?[\dxXzZ_]*(?:\s*@timeunits)?/, 'number'],
+			[/1step/, 'number'],
 			[/'[01xXzZ]+/, 'number'],
 		],
 
 		module_instance: [
 			{ include: '@whitespace' },
-			[/@symbols/, {token: '@rematch', next: '@pop'}],
+			[/#?\(/, '', '@port_connection'],
+			[/@identifier\s*[;={}\[\]]/, {token: '@rematch', next: '@pop'}],
+			[/@symbols|[;={}\[\]]/, {token: '@rematch', next: '@pop'}],
 			[/@identifier/, 'type'],
-			[/\(/, '', '@port_connection'],
 			[/;/, '', '@pop'],
 		],
 
@@ -247,6 +248,7 @@ export const language = <ILanguage>{
 			{ include: '@identifier_or_keyword' },
 			{ include: '@whitespace' },
 			{ include: '@numbers' },
+			{ include: '@strings'},
 			[/\(/, '', '@port_connection'],
 			[/\)/, '', '@pop'],
 		],
@@ -261,6 +263,11 @@ export const language = <ILanguage>{
 			[/[^\/*]+/, 'comment'],
 			[/\*\//, 'comment', '@pop'],
 			[/[\/*]/, 'comment']
+		],
+
+		strings: [
+			[/"([^"\\]|\\.)*$/, 'string.invalid'],  // non-teminated string
+			[/"/, 'string', '@string'],
 		],
 
 		string: [
