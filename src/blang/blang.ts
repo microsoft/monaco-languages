@@ -32,6 +32,9 @@ export const language = <languages.IMonarchLanguage>{
 
 			// numbers
 			[/\d+/, 'number'],
+			
+			// strings
+			[/\D/g, 'string']
 		],
 
 		whitespace: [
