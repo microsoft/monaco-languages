@@ -67,7 +67,7 @@ export const language = <ILanguage>{
 		'package', 'packed', 'pow', 'private', 'program', 'protected',
 		'public', 'published', 'interface', 'implementation', 'qualified',
 		'read', 'record', 'resident', 'requires', 'resourcestring',
-		'restricted', 'segment', 'set', 'shl', 'shr', 'specialize', 'stored',
+		'restricted', 'segment', 'set', 'shl', 'shr', 'specialize', 'stored', 'strict',
 		'then', 'threadvar', 'to', 'try', 'type', 'unit', 'uses', 'var',
 		'view', 'virtual', 'dynamic', 'overload', 'reintroduce', 'with',
 		'write', 'xor', 'true', 'false', 'procedure', 'function',
